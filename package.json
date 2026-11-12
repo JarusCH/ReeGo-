@@ -2,7 +2,7 @@
   "name": "ree-go",
   "version": "0.1.0",
   "private": true,
-  "description": "ReeGo — Electron MVP for web-game workflow recording and replay",
+  "description": "ReeGo \u2014 Electron MVP for web-game workflow recording and replay",
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:electron\"",
@@ -39,5 +39,8 @@
     "typescript": "^5.8.2",
     "vite": "^6.2.3",
     "wait-on": "^8.0.3"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

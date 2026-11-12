@@ -10,10 +10,16 @@ Electron MVP for **web-game** workflow testing: record a browser flow with Playw
 - SQLite (`better-sqlite3`) for local persistence
 - Glassmorphism UI with light/dark themes
 
+## Requirements
+
+- **Node.js 20+** (Node 18 will show `EBADENGINE` warnings and may fail)
+- npm 10+ recommended
+
 ## Setup
 
 ```bash
-cd ree-go
+git clone https://github.com/JarusCH/ReeGo-.git
+cd ReeGo-
 npm install
 ```
 
