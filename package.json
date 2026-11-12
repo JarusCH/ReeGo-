@@ -1,0 +1,43 @@
+{
+  "name": "ree-go",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ReeGo — Electron MVP for web-game workflow recording and replay",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:electron\"",
+    "dev:renderer": "vite --host 127.0.0.1 --port 5173",
+    "dev:electron": "wait-on tcp:127.0.0.1:5173 && tsc -p tsconfig.electron.json && cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:5173 electron .",
+    "build:renderer": "vite build",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build": "npm run build:renderer && npm run build:electron",
+    "start": "npm run build && electron .",
+    "rebuild:native": "electron-rebuild -f -w better-sqlite3",
+    "smoke": "npm run build && cross-env REEGO_HEADLESS=1 node scripts/smoke.mjs",
+    "postinstall": "playwright install chromium && electron-rebuild -f -w better-sqlite3 || true"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "better-sqlite3": "^11.9.1",
+    "monaco-editor": "^0.52.2",
+    "playwright": "^1.51.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.4.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@types/uuid": "^10.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@electron/rebuild": "^3.7.1",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^35.1.2",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.3",
+    "wait-on": "^8.0.3"
+  }
+}
