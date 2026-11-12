@@ -9,6 +9,13 @@ import * as db from "./db";
 import * as pw from "./playwright-service";
 import type { DeviceProfile } from "./types";
 
+// Linux desktops often lack a correctly owned chrome-sandbox binary.
+// Disable the SUID sandbox so `npm run dev` can boot without root chmod.
+if (process.platform === "linux") {
+  app.commandLine.appendSwitch("no-sandbox");
+  app.commandLine.appendSwitch("disable-setuid-sandbox");
+}
+
 let mainWindow: BrowserWindow | null = null;
 
 function createWindow(): void {

@@ -12,8 +12,20 @@ Electron MVP for **web-game** workflow testing: record a browser flow with Playw
 
 ## Requirements
 
-- **Node.js 20+** (Node 18 will show `EBADENGINE` warnings and may fail)
+- **Node.js 20+** (Node 18 will show `EBADENGINE` / Playwright warnings and may fail)
 - npm 10+ recommended
+- Linux desktop with a display (Electron GUI)
+
+### Install Node 20 (if `nvm` is not installed)
+
+```bash
+# Option A — NodeSource (Ubuntu/Debian)
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node -v   # expect v20.x
+
+# Option B — official binary from https://nodejs.org (LTS 20+)
+```
 
 ## Setup
 
@@ -36,6 +48,21 @@ npm run dev
 ```
 
 This starts the Vite renderer on `http://127.0.0.1:5173` and launches Electron against it.
+
+### Linux: chrome-sandbox / SUID error
+
+If Electron aborts with `The SUID sandbox helper binary was found, but is not configured correctly`, pull the latest `main` (scripts already pass `--no-sandbox`) or run:
+
+```bash
+ELECTRON_DISABLE_SANDBOX=1 npx electron . --no-sandbox
+```
+
+Optional root fix instead:
+
+```bash
+sudo chown root:root node_modules/electron/dist/chrome-sandbox
+sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
+```
 
 ## Run (production build)
 
